@@ -74,10 +74,12 @@ hoặc đảm bảo virtual environment đang active.
 Tạo file `.env` từ mẫu `.env.example` và điền các biến môi trường cần thiết.  
 Ví dụ file `.env` có thể gồm:
 
-- API_KEY="your_api_key_here"
-- API_URL="https://serverless.roboflow.com"
-- MODEL_ID="your_model_id_here"
-- CONF_THRESHOLD="0.8"
+```dotenv
+API_KEY="your_api_key_here"
+API_URL="https://serverless.roboflow.com"
+MODEL_ID="your_model_id_here"
+CONF_THRESHOLD="0.8"
+```
 
 Lưu ý: tên biến tùy thuộc vào cách project bạn implement — kiểm tra `.env.example` để biết chính xác tên biến.
 
