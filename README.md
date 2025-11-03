@@ -121,6 +121,7 @@ pip install --upgrade pip
 ## 📁 Cấu Trúc Thư Mục Dự Án (Gợi ý)
 
 Facedetection_Robofolow/
+```txt
 │
 ├── src/
 │   ├── main.py
@@ -131,7 +132,7 @@ Facedetection_Robofolow/
 ├── .env.example
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## 🧪 Kiểm thử (Testing)
