@@ -4,9 +4,12 @@ from tkinter import Tk
 from dotenv import load_dotenv
 from services import InferenceService, InferenceWorker, CameraManager
 from GUI import create_login_ui, show_notepad
+from database import init_db, check_login
 
 load_dotenv()
 
+# Khởi tạo kết nối tới database
+init_db()
 # 🧠 Khởi tạo inference service
 inference = InferenceService(
     api_key= os.getenv("API_KEY"),
@@ -39,5 +42,5 @@ def monitor(cam, infer):
         pass
 
 
-frm = create_login_ui(root, face_detection, show_notepad)
+frm = create_login_ui(root, face_detection, check_login, show_notepad)
 root.mainloop()
