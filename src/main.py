@@ -20,9 +20,10 @@ inference = InferenceService(
 )
 
 root = Tk()
+cam = CameraManager()
 
 def face_detection():
-    cam = CameraManager()
+
     cam.start()
 
     infer = InferenceWorker(
