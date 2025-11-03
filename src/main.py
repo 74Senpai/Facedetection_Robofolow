@@ -2,7 +2,6 @@ import os
 import threading
 from tkinter import Tk
 from dotenv import load_dotenv
-from inference_sdk import InferenceHTTPClient
 from services import InferenceService, InferenceWorker, CameraManager
 from GUI import create_login_ui, show_notepad
 

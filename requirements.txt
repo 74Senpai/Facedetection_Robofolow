@@ -1,0 +1,5 @@
+# Requires Python >=3.8, <=3.12
+python-dotenv
+opencv-python==4.10.0.84
+roboflow==1.2.11
+inference-sdk
