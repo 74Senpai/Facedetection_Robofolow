@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from repository import User
 
 def create_login_ui(
         root, 
@@ -36,7 +37,7 @@ def create_login_ui(
 
         if check_login_callback(username, password):
             messagebox.showinfo("Thành công", f"Xin chào {username}!")
-            show_notepad_callback(root, frm)  # Mở notepad hoặc màn hình chính
+            show_notepad_callback(root, frm, User(username))  # Mở notepad hoặc màn hình chính
         else:
             messagebox.showerror("Thất bại", "Sai tên đăng nhập hoặc mật khẩu.")
 

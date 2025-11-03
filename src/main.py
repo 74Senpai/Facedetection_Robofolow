@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from services import InferenceService, InferenceWorker, CameraManager
 from GUI import create_login_ui, show_notepad
 from database import init_db, check_login
+from repository import User
 
 load_dotenv()
 
@@ -27,7 +28,7 @@ def face_detection():
     infer = InferenceWorker(
         camera=cam,
         inference_engine=inference,
-        callback=lambda label, conf: show_notepad(root, frm),
+        callback=lambda label, conf: show_notepad(root, frm, User(label)),
         timeout=10,
         interval=0.2
     )

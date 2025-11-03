@@ -30,7 +30,9 @@ def init_db():
     if count == 0:
         users = [
             ("Thong Senpai", "123456", "Hello world"),
-            ("Tam Cter", "baque", "Tribeti")
+            ("Tam Cter", "baque", "Tribeti"),
+            ("Thong", "123123", "Day la notepad sieu cap vip pro"),
+            ("Huy", "363636", "Day la notpad content")
         ]
         cursor.executemany("INSERT INTO users (username, password, note) VALUES (?, ?, ?)", users)
         print("✅ Database initialized with sample users.")
