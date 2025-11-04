@@ -13,8 +13,8 @@ def show_notepad(root, frm, user: User):
     frm.columnconfigure(0, weight=1)
     frm.rowconfigure(0, weight=1)
 
-    text = Text(frm, wrap=WORD, font=("Arial", 12))
-    text.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+    text = Text(frm, wrap=WORD, font=("Consolas", 13), relief=FLAT, bd=2)
+    text.grid(row=0, column=0, sticky="nsew", padx=15, pady=(40, 10))
 
     if user.note:
         text.insert(END, user.note)
