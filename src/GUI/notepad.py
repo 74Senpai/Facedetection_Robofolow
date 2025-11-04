@@ -4,8 +4,6 @@ from repository import User
 
 
 def show_notepad(root, frm, user: User):
-    """Hiển thị giao diện notepad nền tối có nút Thoát riêng"""
-
     # Dọn sạch frame cũ hoặc tạo mới nếu frm=None
     if frm is None:
         frm = Frame(root, bg="#181818")

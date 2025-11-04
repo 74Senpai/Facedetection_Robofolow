@@ -4,8 +4,6 @@ from repository import User
 
 
 def create_login_ui(root, face_detection_callback, check_login_callback, show_notepad_callback):
-    """Giao diện đăng nhập - dark mode nhẹ, không nền đè."""
-
     # Xóa mọi UI cũ
     for widget in root.winfo_children():
         widget.destroy()
