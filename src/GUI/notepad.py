@@ -2,23 +2,46 @@ from tkinter import *
 from tkinter import ttk, messagebox
 from repository import User
 
+
 def show_notepad(root, frm, user: User):
-    """Hiển thị giao diện notepad"""
-    for widget in frm.winfo_children():
-        widget.destroy()
+    """Hiển thị giao diện notepad nền tối có nút Thoát riêng"""
 
-    root.geometry("400x500")
+    # Dọn sạch frame cũ hoặc tạo mới nếu frm=None
+    if frm is None:
+        frm = Frame(root, bg="#181818")
+        frm.pack(expand=True, fill=BOTH)
+    else:
+        for widget in frm.winfo_children():
+            widget.destroy()
+
+    root.geometry("500x500")
     root.title(f"Mini Notepad - {user.username}")
+    root.configure(bg="#181818")
 
-    frm.columnconfigure(0, weight=1)
-    frm.rowconfigure(0, weight=1)
+    # ===== Tiêu đề =====
+    title = Label(frm,
+                  text=f"📝 Ghi chú của {user.username}",
+                  font=("Segoe UI", 18, "bold"),
+                  bg="#181818", fg="white")
+    title.pack(pady=(10, 10))
 
-    text = Text(frm, wrap=WORD, font=("Consolas", 13), relief=FLAT, bd=2)
-    text.grid(row=0, column=0, sticky="nsew", padx=15, pady=(40, 10))
+    # ===== Ô nhập văn bản =====
+    text = Text(frm,
+                wrap=WORD,
+                font=("Consolas", 12),
+                bg="#222222",
+                fg="white",
+                insertbackground="white",
+                relief=FLAT,
+                padx=10,
+                pady=10)
+    text.pack(expand=True, fill=BOTH, padx=10, pady=(0, 10))
 
+    # Hiển thị ghi chú đã lưu nếu có
     if user.note:
         text.insert(END, user.note)
 
+    # Trạng thái lưu
     saved_state = {"saved": True}
 
     def on_text_change(event=None):
@@ -26,32 +49,28 @@ def show_notepad(root, frm, user: User):
 
     text.bind("<Key>", on_text_change)
 
+    # ===== Chức năng =====
     def save_note():
-        """Lưu lại note vào DB"""
+        """Lưu nội dung ghi chú"""
         new_note = text.get("1.0", END).strip()
         user.update_note(new_note)
         saved_state["saved"] = True
-        messagebox.showinfo("Đã lưu", "Ghi chú đã được lưu thành công!")
+        messagebox.showinfo("💾 Đã lưu", "Ghi chú đã được lưu thành công!")
 
-    def on_close():
-        """Xử lý khi nhấn X"""
+    def confirm_exit():
+        """Hỏi xác nhận thoát"""
         if not saved_state["saved"]:
             res = messagebox.askyesnocancel(
                 "Xác nhận thoát",
-                "Ghi chú của bạn chưa được lưu.\nBạn có muốn lưu trước khi thoát không?"
+                "Ghi chú của bạn chưa được lưu.\nBạn có muốn lưu trước khi thoát không?",
+                icon="warning"
             )
             if res is None:
                 return
-            elif res: 
+            elif res:
                 save_note()
         root.destroy()
 
-    def save_and_close():
-        """Nút 'Thoát' — luôn lưu rồi thoát"""
-        save_note()
-        root.destroy()
 
-    btn = ttk.Button(frm, text="💾 Lưu và Thoát", command=save_and_close)
-    btn.grid(row=1, column=0, sticky="ew", padx=10, pady=10)
-
-    root.protocol("WM_DELETE_WINDOW", on_close)
+    # Khi nhấn nút X
+    root.protocol("WM_DELETE_WINDOW", confirm_exit)
