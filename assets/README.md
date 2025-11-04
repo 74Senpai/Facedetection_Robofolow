@@ -1,0 +1,1 @@
+### Thư mục để chứa ảnh tạm thời phục vụ quá trình xử lý

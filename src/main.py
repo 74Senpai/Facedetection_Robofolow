@@ -1,22 +1,20 @@
-import os
 import threading
 from tkinter import Tk
-from dotenv import load_dotenv
 from services import InferenceService, InferenceWorker, CameraManager
 from GUI import create_login_ui, show_notepad
 from database import init_db, check_login
 from repository import User
+from config import API_KEY, API_URL, MODEL_ID, FACE_DETEC_THRESHOLD
 
-load_dotenv()
 
 # Khởi tạo kết nối tới database
 init_db()
 # 🧠 Khởi tạo inference service
 inference = InferenceService(
-    api_key= os.getenv("API_KEY"),
-    api_url=os.getenv("API_URL"),
-    model_id=os.getenv("MODEL_ID"),
-    conf_threshold=float(os.getenv("CONF_THRESHOLD", 0.5))
+    api_key = API_KEY,
+    api_url = API_URL,
+    model_id = MODEL_ID,
+    conf_threshold= FACE_DETEC_THRESHOLD
 )
 
 root = Tk()
