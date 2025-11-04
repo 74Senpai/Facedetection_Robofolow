@@ -5,13 +5,9 @@ from repository import User
 
 def show_notepad(root, frm, user: User):
     """Hiển thị giao diện notepad"""
-    # Dọn sạch frame cũ hoặc tạo mới nếu frm=None
-    if frm is None:
-        frm = Frame(root, bg="#181818")
-        frm.pack(expand=True, fill=BOTH)
-    else:
-        for widget in frm.winfo_children():
-            widget.destroy()
+    # Dọn sạch frame cũ
+    for widget in frm.winfo_children():
+        widget.destroy()
 
     root.geometry("500x500")
     root.title(f"Mini Notepad - {user.username}")
