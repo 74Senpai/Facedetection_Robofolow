@@ -1,5 +1,5 @@
 from tkinter import Label,Button,Frame,BOTH,WORD,Text,END,FLAT
-from tkinter import ttk, messagebox
+from tkinter import messagebox
 from repository import User
 
 
@@ -70,9 +70,8 @@ def show_notepad(root, frm, user: User):
                 save_note()
         root.destroy()
     # ===== Nút Lưu =====
-    save_button = Button(frm, text="💾 Lưu", command=save_note, bg="#3a86ff", fg="white",
-                         font=("Segoe UI", 11, "bold"), relief=FLAT, cursor="hand2")
-    save_button.pack(side="bottom", fill="x", padx=10, pady=10, ipady=6)
+    
+    Button(frm, text="💾 Lưu", command=save_note, bg="#3a86ff", fg="white", font=("Segoe UI", 11, "bold"), relief=FLAT, cursor="hand2").pack(side="bottom", fill="x", padx=10, pady=10, ipady=6)
 
     # Khi nhấn nút X
     root.protocol("WM_DELETE_WINDOW", confirm_exit)
