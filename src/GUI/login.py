@@ -1,8 +1,31 @@
-from tkinter import *
-from tkinter import ttk, messagebox
+from tkinter import Label, Button, Frame, BOTH, Entry, X, FLAT
+from tkinter import messagebox
 from repository import User
 
+# ===== Hàm tiện ích tạo nút với hover =====
+def make_button(parent, text, cmd, bg, hover, pady=6):
+    """
+    Tạo Button với hover effect.
+    parent: Frame hoặc widget chứa button
+    text: nội dung hiển thị
+    cmd: callback khi click
+    bg: màu nền mặc định
+    hover: màu nền khi hover
+    pady: khoảng cách dọc
+    """
+    def on_enter(e): e.widget.config(bg=hover)
+    def on_leave(e): e.widget.config(bg=bg)
 
+    btn = Button(parent, text=text, command=cmd, bg=bg, fg="white",
+                 font=("Segoe UI", 11, "bold"), relief=FLAT,
+                 cursor="hand2", activebackground=hover,
+                 activeforeground="white")
+    btn.pack(fill=X, padx=30, pady=pady, ipady=6)
+    btn.bind("<Enter>", on_enter)
+    btn.bind("<Leave>", on_leave)
+    return btn
+
+# ===== Hàm tạo UI đăng nhập =====
 def create_login_ui(root, face_detection_callback, check_login_callback, show_notepad_callback):
     # Xóa mọi UI cũ
     for widget in root.winfo_children():
@@ -47,27 +70,13 @@ def create_login_ui(root, face_detection_callback, check_login_callback, show_no
 
         if check_login_callback(username, password):
             messagebox.showinfo("Thành công", f"Xin chào {username}!")
-            show_notepad_callback(root, frm, User(username))  # ✅ truyền đúng frm
+            show_notepad_callback(root, frm, User(username))
         else:
             messagebox.showerror("Thất bại", "Sai tên đăng nhập hoặc mật khẩu.")
 
-    # ===== Hàm tạo nút (có hover) =====
-    def make_button(text, cmd, bg, hover, pady=6):
-        def on_enter(e): e.widget.config(bg=hover)
-        def on_leave(e): e.widget.config(bg=bg)
-
-        btn = Button(frm, text=text, command=cmd, bg=bg, fg="white",
-                     font=("Segoe UI", 11, "bold"), relief=FLAT,
-                     cursor="hand2", activebackground=hover,
-                     activeforeground="white")
-        btn.pack(fill=X, padx=30, pady=pady, ipady=6)
-        btn.bind("<Enter>", on_enter)
-        btn.bind("<Leave>", on_leave)
-        return btn
-
     # ===== Các nút =====
-    make_button("Đăng nhập", handle_login, "#3a86ff", "#265ecf", pady=8)
-    make_button("Đăng nhập bằng Camera", face_detection_callback, "#2a9d8f", "#1d726a", pady=8)
-    make_button("Thoát", root.destroy, "#d62828", "#9d0208", pady=15)
+    make_button(frm, "Đăng nhập", handle_login, "#3a86ff", "#265ecf", pady=8)
+    make_button(frm, "Đăng nhập bằng Camera", face_detection_callback, "#2a9d8f", "#1d726a", pady=8)
+    make_button(frm, "Thoát", root.destroy, "#d62828", "#9d0208", pady=15)
 
     return frm
