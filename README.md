@@ -126,7 +126,7 @@ pip install --upgrade pip
 Facedetection_Robofolow/
 │
 ├── assets/
-├── face_decetetion_img/
+├── face_detection_img/
 │   └── your_img_folder
 ├── src/
 │   ├── main.py
