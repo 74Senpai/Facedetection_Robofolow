@@ -2,9 +2,9 @@ import sys
 from src.database import init_db
 from src.services import facedetection_service
 
-if len(sys.argv) < 2:
-    print("Cách dùng: python save_face_embed.py username image_folder")
-    sys.exit()
+if len(sys.argv) < 3:
+    print("Cách dùng: python -m src.scripts.save_face_embed username image_folder")
+    sys.exit(1)
 
 username = sys.argv[1]
 image_folder = sys.argv[2]
