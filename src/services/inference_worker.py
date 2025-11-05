@@ -54,7 +54,7 @@ class InferenceWorker:
 
         print("🛑 Inference loop stopped.")
 
-    def _process_inference_results(self, frame, results, padding_ratio=0.2):
+    def _process_inference_results(self, frame, results, padding_ratio=0.4):
         """Xử lý đầu ra YOLO, cắt khuôn mặt với padding và nhận diện."""
         from src.services import recognize_user_from_frame
 
