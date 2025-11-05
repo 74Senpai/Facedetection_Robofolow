@@ -41,7 +41,7 @@ Tạo môi trường ảo để tránh xung đột package.
 Windows (PowerShell):
 ```bash
 python -m venv .venv
-.\.venv\Scripts\activate
+./.venv/Scripts/Activate.ps1
 ```
 Windows (cmd):
 ```bash
