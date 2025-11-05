@@ -3,7 +3,7 @@ import numpy as np
 import json
 from insightface.app import FaceAnalysis
 from tqdm import tqdm
-from database import *
+from src.database import *
 
 # Khởi tạo model nhận diện khuôn mặt
 app = FaceAnalysis(name="buffalo_l", providers=['CPUExecutionProvider'])

@@ -1,6 +1,6 @@
 from tkinter import Label,Button,Frame,BOTH,WORD,Text,END,FLAT
 from tkinter import messagebox
-from repository import User
+from src.repository import User
 
 
 def show_notepad(root, frm, user: User):

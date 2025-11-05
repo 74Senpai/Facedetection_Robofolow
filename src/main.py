@@ -1,10 +1,10 @@
 import threading
 from tkinter import Tk
-from services import InferenceService, InferenceWorker, CameraManager
-from GUI import create_login_ui, show_notepad
-from database import init_db, check_login
-from repository import User
-from config import API_KEY, API_URL, MODEL_ID, FACE_DETEC_THRESHOLD
+from src.services import InferenceService, InferenceWorker, CameraManager
+from src.GUI import create_login_ui, show_notepad
+from src.database import init_db, check_login
+from src.repository import User
+from src.config import API_KEY, API_URL, MODEL_ID, FACE_DETEC_THRESHOLD
 
 
 # Khởi tạo kết nối tới database
@@ -28,7 +28,7 @@ def face_detection():
         camera=cam,
         inference_engine=inference,
         callback=lambda label, conf: show_notepad(root, frm, User(label)),
-        timeout=10,
+        timeout=60,
         interval=0.2
     )
 

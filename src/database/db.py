@@ -1,7 +1,7 @@
 import sqlite3
 import os
 import json
-from config import DATABASE_PATH
+from src.config import DATABASE_PATH
 
 def init_db():
     """

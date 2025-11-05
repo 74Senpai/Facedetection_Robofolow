@@ -41,7 +41,7 @@ Tạo môi trường ảo để tránh xung đột package.
 Windows (PowerShell):
 ```bash
 python -m venv .venv
-.\.venv\Scripts\activate
+./.venv/Scripts/Activate.ps1
 ```
 Windows (cmd):
 ```bash
@@ -95,16 +95,16 @@ Lưu ý: tên biến tùy thuộc vào cách project bạn implement — kiểm 
 
 ---
 
-### Bước 6: Chạy ứng dụng
+### Bước 6: Chạy ứng dụng (Cần phải chạy module)
 Từ thư mục gốc của dự án, chạy:
 ```bash
-python src/main.py
+python -m src/main.py
 ```
 
 Hoặc nếu bạn trên macOS/Linux và Python 3 là `python3`:
 
 ```bash
-python3 src/main.py```
+python3 -m src/main.py```
 
 
 ---
@@ -121,11 +121,16 @@ pip install --upgrade pip
 
 ## 📁 Cấu Trúc Thư Mục Dự Án (Gợi ý)
 
-Facedetection_Robofolow/
 ```txt
+
+Facedetection_Robofolow/
 │
+├── assets/
+├── face_decetetion_img/
+│   └── your_img_folder
 ├── src/
 │   ├── main.py
+│   ├── config.py
 │   ├── ui/                # Giao diện người dùng
 │   ├── face_recognition/  # Xử lý nhận diện khuôn mặt (Roboflow API interaction)
 │   └── utils/             # Các hàm hỗ trợ

@@ -1,6 +1,6 @@
 import time
 import threading
-import config
+import src.config as config
 
 class InferenceWorker:
     def __init__(self, camera, inference_engine, callback, interval=0.2, timeout=10):
@@ -45,6 +45,7 @@ class InferenceWorker:
                 if frame is not None:
                     results = self.inference.infer_frame(frame)
                     if results:
+                        print(results)
                         if self._process_inference_results(frame, results):
                             return
                 last_time = time.time()
@@ -53,30 +54,50 @@ class InferenceWorker:
 
         print("🛑 Inference loop stopped.")
 
-    def _process_inference_results(self, frame, results):
-        """Xử lý đầu ra YOLO, cắt khuôn mặt và nhận diện."""
-        from services import recognize_user_from_frame
-        conf = results[0].get("confidence", 0)
+    def _process_inference_results(self, frame, results, padding_ratio=0.2):
+        """Xử lý đầu ra YOLO, cắt khuôn mặt với padding và nhận diện."""
+        from src.services import recognize_user_from_frame
 
-        if conf < config.FACE_DETEC_THRESHOLD:
-            print(f"⚠️ YOLO phát hiện khuôn mặt nhưng độ tin cậy thấp ({conf:.2f})")
+        if not results:
             return False
 
-        print(f"👁️ Phát hiện khuôn mặt (YOLO conf={conf:.2f})")
+        frame_h, frame_w = frame.shape[:2]
 
         for r in results:
-            for box in r.boxes.xyxy:
-                x1, y1, x2, y2 = map(int, box)
-                face = frame[y1:y2, x1:x2]
+            conf = r.get("confidence", 0)
+            if conf < config.FACE_DETEC_THRESHOLD:
+                print(f"⚠️ YOLO phát hiện khuôn mặt nhưng độ tin cậy thấp ({conf:.2f})")
+                continue
 
-                recognized_user = recognize_user_from_frame(face, threshold=config.FACE_RECO_THRESHOLD)
+            print(f"👁️ Phát hiện khuôn mặt (YOLO conf={conf:.2f})")
 
-                if recognized_user:
-                    username, match_conf = recognized_user
-                    if self._handle_recognition_result(username, match_conf):
-                        return True
-                else:
-                    print("❌ Không khớp với người dùng nào trong DB.")
+            # Lấy tọa độ gốc
+            x1 = int(r['x'])
+            y1 = int(r['y'])
+            x2 = int(x1 + r['width'])
+            y2 = int(y1 + r['height'])
+
+            # Tính padding
+            pad_w = int((x2 - x1) * padding_ratio)
+            pad_h = int((y2 - y1) * padding_ratio)
+
+            # Mở rộng bounding box và đảm bảo không vượt quá kích thước ảnh
+            x1_pad = max(0, x1 - pad_w)
+            y1_pad = max(0, y1 - pad_h)
+            x2_pad = min(frame_w, x2 + pad_w)
+            y2_pad = min(frame_h, y2 + pad_h)
+
+            # Cắt khuôn mặt với padding
+            face = frame[y1_pad:y2_pad, x1_pad:x2_pad].copy()  # đảm bảo là numpy array độc lập
+
+            recognized_user = recognize_user_from_frame(frame, threshold=config.FACE_RECO_THRESHOLD)
+
+            if recognized_user:
+                username, match_conf = recognized_user
+                if self._handle_recognition_result(username, match_conf):
+                    return True
+            else:
+                print("❌ Không khớp với người dùng nào trong DB.")
 
         return False
 
