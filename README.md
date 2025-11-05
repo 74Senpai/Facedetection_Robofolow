@@ -98,7 +98,7 @@ Lưu ý: tên biến tùy thuộc vào cách project bạn implement — kiểm 
 ### Bước 6: Chạy ứng dụng (Cần phải chạy module)
 Từ thư mục gốc của dự án, chạy:
 ```bash
-python -m src/main.py
+python -m src.main
 ```
 
 Hoặc nếu bạn trên macOS/Linux và Python 3 là `python3`:
