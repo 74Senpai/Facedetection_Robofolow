@@ -90,7 +90,7 @@ class InferenceWorker:
             # Cắt khuôn mặt với padding
             face = frame[y1_pad:y2_pad, x1_pad:x2_pad].copy()  # đảm bảo là numpy array độc lập
 
-            recognized_user = recognize_user_from_frame(frame, threshold=config.FACE_RECO_THRESHOLD)
+            recognized_user = recognize_user_from_frame(face, threshold=config.FACE_RECO_THRESHOLD)
 
             if recognized_user:
                 username, match_conf = recognized_user
