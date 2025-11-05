@@ -1,6 +1,6 @@
 from tkinter import Label, Button, Frame, BOTH, Entry, X, FLAT
 from tkinter import messagebox
-from repository import User
+from src.repository import User
 
 # ===== Hàm tiện ích tạo nút với hover =====
 def make_button(parent, text, cmd, bg, hover, pady=6):

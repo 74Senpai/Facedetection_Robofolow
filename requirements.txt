@@ -3,3 +3,8 @@ python-dotenv
 opencv-python==4.10.0.84
 roboflow==1.2.11
 inference-sdk
+ultralytics
+torch
+torchvision
+numpy
+insightface
