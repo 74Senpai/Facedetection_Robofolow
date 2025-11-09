@@ -3,7 +3,7 @@ import threading
 import time
 
 class CameraManager:
-    def __init__(self, camera_source=1):
+    def __init__(self, camera_source=0):
         self.cap = cv2.VideoCapture(camera_source, cv2.CAP_DSHOW)
         self.running = False
         self.frame = None
