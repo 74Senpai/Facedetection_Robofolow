@@ -104,7 +104,7 @@ python -m src.main
 Hoặc nếu bạn trên macOS/Linux và Python 3 là `python3`:
 
 ```bash
-python3 -m src.main.py```
+python3 -m src.main```
 
 
 ---
