@@ -40,19 +40,19 @@ Tạo môi trường ảo để tránh xung đột package.
 
 Windows (PowerShell):
 ```bash
-python -m venv .venv
-./.venv/Scripts/Activate.ps1
+python -m venv venv
+./venv/Scripts/Activate.ps1
 ```
 Windows (cmd):
 ```bash
-python -m venv .venv
-.\.venv\Scripts\activate
+python -m venv venv
+.\venv\Scripts\activate
 ```
 
 macOS / Linux:
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ---
@@ -98,13 +98,13 @@ Lưu ý: tên biến tùy thuộc vào cách project bạn implement — kiểm 
 ### Bước 6: Chạy ứng dụng (Cần phải chạy module)
 Từ thư mục gốc của dự án, chạy:
 ```bash
-python -m src.main
+python -m src.main.py
 ```
 
 Hoặc nếu bạn trên macOS/Linux và Python 3 là `python3`:
 
 ```bash
-python3 -m src/main.py```
+python3 -m src.main.py```
 
 
 ---
@@ -149,4 +149,4 @@ Facedetection_Robofolow/
 
 ## 🔒 Bảo mật
 - Không commit file `.env` chứa api_key hoặc secret lên public repo.
-- Sử dụng `.gitignore` để loại trừ `.env` và folder `.venv`.
+- Sử dụng `.gitignore` để loại trừ `.env` và folder `venv`.
