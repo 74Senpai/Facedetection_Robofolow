@@ -18,17 +18,17 @@ inference = InferenceService(
 )
 
 root = Tk()
-cam = CameraManager()
 
 def face_detection():
 
+    cam = CameraManager()
     cam.start()
 
     infer = InferenceWorker(
         camera=cam,
         inference_engine=inference,
         callback=lambda label, conf: show_notepad(root, frm, User(label)),
-        timeout=60,
+        timeout=10,
         interval=0.2
     )
 
