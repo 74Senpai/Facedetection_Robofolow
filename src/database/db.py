@@ -35,7 +35,7 @@ def init_db():
     if count == 0:
         users = [
             ("Thong Senpai", "123456", "Hello world"),
-            ("Tam Cter", "baque", "Tribeti"),
+            ("TamCter", "baque", "Tribeti"),
             ("Thong", "123123", "Notepad siêu cấp"),
             ("Huy", "363636", "Notepad content")
         ]
